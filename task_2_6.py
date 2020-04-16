@@ -28,9 +28,10 @@ measure_units_set = set()
 measure_units_list = []
 params_list = []
 keys_list = []
-good_dict = {}
+goods_dict = {}
 result_dict = {}
 
+# filling data to goods_list
 i = 1
 while True:
     print(f"Введите параметры товара #{i} или exit вместо названия для завершения ввода: ")
@@ -39,37 +40,32 @@ while True:
     quantity = 0
     measure_unit = None
     if name != "exit":
-        names_list.append(name)
         price = input("цена: ")
         price = int(price) if price.isdigit() else 0
-        prices_list.append(price)
         quantity = input("количество: ")
         quantity = int(quantity) if quantity.isdigit() else 0
-        counts_list.append(quantity)
         measure_unit = input("единица измерения: ")
-        measure_units_set.add(measure_unit)
-        good_dict["название"] = name
-        good_dict["цена"] = price
-        good_dict["количество"] = quantity
-        good_dict["ед"] = measure_unit
-        goods_list.append((i, good_dict))
+        goods_dict["название"] = name
+        goods_dict["цена"] = price
+        goods_dict["количество"] = quantity
+        goods_dict["eд"] = measure_unit
+        copy_goods_dict = dict(goods_dict)
+        goods_list.append((i, copy_goods_dict))
         i += 1
     else:
         break
 print("=" * 150)
-print(f"Исходный перечень товаров:\n{goods_list}")
+print(f"Перечень товаров, добавленных в список:\n{goods_list}")
 
-for key in good_dict.keys():
+for key in goods_dict.keys():
     keys_list.append(key)
 
-"""
-for i in test_list:
+# parsing from goods_list
+for i in goods_list:
     names_list.append(i[1].get("название"))
     prices_list.append(i[1].get("цена"))
     counts_list.append(i[1].get("количество"))
-    measure_unit_set.add(i[1].get("eд"))
-"""
-
+    measure_units_set.add(i[1].get("eд"))
 measure_units_list.extend(measure_units_set)
 params_list = [names_list, prices_list, counts_list, measure_units_list]
 
@@ -78,4 +74,4 @@ for i in range(0, len(keys_list)):
     result_dict[key] = params_list[i]
     i += 1
 print("=" * 150)
-print(f"Сформированная аналитика по товарам:\n{result_dict}")
+print(f"Сформированная аналитика по товарам в списке:\n{result_dict}")
