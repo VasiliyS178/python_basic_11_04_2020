@@ -12,7 +12,7 @@ while True:
         print("Input only integer numbers")
         number = input('Input a number: ')
 
-number_2 = number * 2
-number_3 = number * 3
+number_2, number_3 = number * 2, number * 3
 
-print(f"{number_1} + {number_2} + {number_3} =", number_1 + int(number_2) + int(number_3))
+print(f"{number_1} + {number_2} + {number_3} = {int(number_1) + int(number_2) + int(number_3)}")
+
